@@ -4,7 +4,7 @@ from __future__ import print_function
 import numpy as np
 import matplotlib
 
-matplotlib.use('TkAgg')
+# matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
 np.random.seed(0)  # set the random seed for reproducibility
@@ -47,4 +47,5 @@ prediction = np.dot(Phi, theta)
 plt.clf()
 plt.scatter(x, y, c='green', marker='o')
 plt.plot(X, prediction)
-plt.savefig('lecture2-p28.png')
+plt.show()
+plt.savefig('result_linear_model.png')
