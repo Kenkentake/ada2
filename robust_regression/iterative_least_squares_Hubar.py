@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib
 
-matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
 np.random.seed(1)
@@ -10,7 +9,7 @@ np.random.seed(1)
 def generate_sample(x_min=-3., x_max=3., sample_size=10):
     x = np.linspace(x_min, x_max, num=sample_size)
     y = x + np.random.normal(loc=0., scale=.2, size=sample_size)
-    y[-1] = -4  # outlier
+    y[-1] = y[-2] = y[1] = -4  # outlier
     return x, y
 
 
