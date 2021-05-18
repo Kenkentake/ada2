@@ -36,12 +36,12 @@ def build_confusion_matrix(train_data, data, theta):
     for i in range(2):
         test_data = np.transpose(data[:, :, i], (1, 0))
         prediction = predict(train_data, test_data, theta)
+        print(prediction)
         confusion_matrix[i][0] = np.sum(
             np.where(prediction > 0, 1, 0))
         confusion_matrix[i][1] = np.sum(
             np.where(prediction < 0, 1, 0))
     return confusion_matrix
-
 
 data = loadmat('digit.mat')
 x, y = generate_train_data(data)
