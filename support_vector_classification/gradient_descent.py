@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib
 
-matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
 np.random.seed(1)
@@ -51,6 +50,10 @@ def svm(x, y, l, lr):
     for i in range(10 ** 4):
 
         # implement here
+        ywx = y.dot(w * x)
+        gw = np.mean(np.where(ywx < 1, -x * y[:, None], 0.), 0) + l * w
+        w -= lr * gw
+
 
         if np.linalg.norm(w - prev_w) < 1e-3:
             break
