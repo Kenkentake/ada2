@@ -29,13 +29,16 @@ def lrls(x, y, h=1., l=1., nu=1.):
     :param nu: Laplace regularization
     :return:
     """
-
-    #
-    # Implement this function
-    #
-
-    pass
-
+    n = len(x)
+    phi = np.exp(-np.sum((x[None] - x[:, None]) ** 2, axis=2) / (2 * h ** 2))
+    # only labeled data
+    phi_tilde = phi[y != 0]
+    W = np.exp(-np.sum((x[None] - x[:, None]) ** 2, axis=2) / (2 * h ** 2))
+    L = np.diag(np.sum(W, axis=1)) - W
+    return np.linalg.solve(
+            phi_tilde.T.dot(phi_tilde) + l * np.eye(n) + 2 * nu * phi.T.dot(L).dot(phi),
+            phi_tilde.T.dot(y[y != 0])
+    )
 
 def visualize(x, y, theta, h=1.):
     plt.clf()
@@ -58,5 +61,6 @@ def visualize(x, y, theta, h=1.):
 
 
 x, y = generate_data(n=200)
+lrls(x, y, h=1.)
 theta = lrls(x, y, h=1.)
 visualize(x, y, theta)
